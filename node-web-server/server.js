@@ -2,6 +2,9 @@ const express = require('express');
 const hbs = require('hbs');
 const fs = require('fs');
 
+//port from enviromental variables from heroku or other server, if it doesn't exist use 3000
+const port = process.env.PORT || 3000;
+
 var app = express();
 
 hbs.registerPartials(__dirname + '/views/partials');
@@ -75,4 +78,9 @@ app.get('/maintenance', (req, res) => {
 });
 
 
-app.listen(3000);
+//app.listen(3000);
+
+//the port is dinamic from heroku
+app.listen(port, () => {
+    console.log(`Server is up and running on port ${port} `);
+});
